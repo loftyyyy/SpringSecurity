@@ -11,6 +11,7 @@ public class ProjectConfig {
 
     @Bean
     SecurityFilterChain configure(HttpSecurity http) throws Exception{
+
         http.httpBasic(Customizer.withDefaults());
 
         http.authorizeHttpRequests(C -> C.anyRequest().permitAll());
