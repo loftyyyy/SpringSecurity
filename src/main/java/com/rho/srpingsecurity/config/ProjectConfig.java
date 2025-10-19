@@ -27,4 +27,11 @@ public class ProjectConfig {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        http.httpBasic(Customizer.withDefaults());
+        http.authorizeHttpRequests(c-> c.anyRequest().permitAll());
+        return http.build();
+    }
 }
