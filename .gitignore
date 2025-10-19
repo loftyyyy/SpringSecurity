@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/src/main/resources/application.properties
+
+# Ignore certificate and key files
+*.p12
+*.pem
+*.key
+*.crt

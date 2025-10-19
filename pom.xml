@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.rho</groupId>
-    <artifactId>SrpingSecurity</artifactId>
+    <artifactId>SpringSecurity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SrpingSecurity</name>
     <description>SrpingSecurity</description>
