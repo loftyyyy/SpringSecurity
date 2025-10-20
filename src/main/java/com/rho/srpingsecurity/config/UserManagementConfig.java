@@ -17,7 +17,7 @@ public class UserManagementConfig {
     @Bean
     UserDetailsService userDetailsService(){
         var user = withUsername("user")
-                .password("1234")
+                .password(passwordEncoder().encode("1234"))
                 .authorities("read")
                 .build();
         return new InMemoryUserDetailsManager(user);
