@@ -4,6 +4,7 @@ package com.rho.srpingsecurity.config;
 import com.rho.srpingsecurity.service.InMemoryUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,7 +26,7 @@ public class UserManagementConfig {
 //                .authorities("read")
 //                .build();
 //        return new InMemoryUserDetailsManager(user);
-        UserDetails u = new User("user", "1234", "read");
+        UserDetails u = new User("user", passwordEncoder().encode("1234"), AuthorityUtils.createAuthorityList("read"));
         List<UserDetails> users = List.of(u);
         return new InMemoryUserDetailsService(users);
     }
