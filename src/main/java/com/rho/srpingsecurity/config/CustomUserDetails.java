@@ -1,6 +1,5 @@
 package com.rho.srpingsecurity.config;
 
-import com.rho.srpingsecurity.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
