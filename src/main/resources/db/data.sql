@@ -1,2 +1,2 @@
-INSERT INTO `spring`.`authorities` (username, authority) VALUES ('john', 'write');
-INSERT INTO `spring`.`users` (username, password, enabled) VALUES ('john', '123', '1');
+INSERT INTO authorities (username, authority) VALUES ('john', 'write');
+INSERT INTO users (username, password, enabled) VALUES ('john', '123', 1);
