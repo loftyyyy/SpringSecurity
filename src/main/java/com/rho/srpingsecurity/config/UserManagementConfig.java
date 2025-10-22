@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 import static org.springframework.security.core.userdetails.User.*;
@@ -20,15 +22,18 @@ import static org.springframework.security.core.userdetails.User.*;
 public class UserManagementConfig {
 
     @Bean
-    UserDetailsService userDetailsService(){
+    UserDetailsService userDetailsService(DataSource datasource){
 //        var user = withUsername("user")
 //                .password(passwordEncoder().encode("1234"))
 //                .authorities("read")
 //                .build();
 //        return new InMemoryUserDetailsManager(user);
-        UserDetails u = new User("user", passwordEncoder().encode("1234"), AuthorityUtils.createAuthorityList("read"));
-        List<UserDetails> users = List.of(u);
-        return new InMemoryUserDetailsService(users);
+//        UserDetails u = new User("user", passwordEncoder().encode("1234"), AuthorityUtils.createAuthorityList("read"));
+//        List<UserDetails> users = List.of(u);
+//        return new InMemoryUserDetailsService(users);
+
+        return new JdbcUserDetailsManager(datasource);
+
     }
 
     @Bean
