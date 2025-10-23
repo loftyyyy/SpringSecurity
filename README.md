@@ -1,1 +1,1 @@
-Initial Readme
+When setting up security in a Spring Boot project, the first step is to add the Spring Security dependency. Then, we need to define how our application will manage users. This is done by implementing a UserDetailsService to handle user data and a PasswordEncoder to manage password encryption. These components are required by Spring Security’s authentication provider to verify user credentials.
