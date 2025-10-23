@@ -24,17 +24,7 @@ public class UserManagementConfig {
 
     @Bean
     UserDetailsService userDetailsService(DataSource datasource){
-//        var user = withUsername("user")
-//                .password(passwordEncoder().encode("1234"))
-//                .authorities("read")
-//                .build();
-//        return new InMemoryUserDetailsManager(user);
-//        UserDetails u = new User("user", passwordEncoder().encode("1234"), AuthorityUtils.createAuthorityList("read"));
-//        List<UserDetails> users = List.of(u);
-//        return new InMemoryUserDetailsService(users);
-
         return new JdbcUserDetailsManager(datasource);
-
     }
 
     @Bean
