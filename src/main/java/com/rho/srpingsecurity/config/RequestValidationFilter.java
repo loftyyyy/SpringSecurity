@@ -3,23 +3,23 @@ package com.rho.srpingsecurity.config;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.net.http.HttpRequest;
 
-public class RequestValidationFilter implements Filter {
+public class RequestValidationFilter extends OncePerRequestFilter {
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        var httpRequest = (HttpServletRequest) servletRequest;
-        var httpResponse = (HttpServletResponse) servletResponse;
-
-        String requestId = httpRequest.getHeader("Request-Id");
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        var requestId = request.getHeader("Request-Id");
 
         if(requestId == null || requestId.isBlank()){
-            httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-        filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(request, response);
     }
+
+
 }

@@ -14,6 +14,7 @@ public class WebAuthorizationConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class);
         http.addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class);
+        http.addFilterAt()
         http.httpBasic(Customizer.withDefaults());
         http.authorizeHttpRequests(c -> c.anyRequest().authenticated());
         return http.build();
