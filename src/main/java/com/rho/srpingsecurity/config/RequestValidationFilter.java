@@ -7,8 +7,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.net.http.HttpRequest;
+import java.util.logging.Logger;
 
 public class RequestValidationFilter extends OncePerRequestFilter {
+    private final Logger logger = Logger.getLogger(RequestValidationFilter.class.getName());
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -16,8 +18,10 @@ public class RequestValidationFilter extends OncePerRequestFilter {
 
         if(requestId == null || requestId.isBlank()){
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            logger.info("Request Id is null");
             return;
         }
+        logger.info("Request Id: " + requestId);
         filterChain.doFilter(request, response);
     }
 
