@@ -10,9 +10,14 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 @Configuration
 public class WebAuthorizationConfig {
+    private final StaticAuthenticationFilter staticAuthenticationFilter;
+
+    public WebAuthorizationConfig(StaticAuthenticationFilter staticAuthenticationFilter){
+        this.staticAuthenticationFilter = staticAuthenticationFilter;
+    }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http, StaticAuthenticationFilter staticAuthenticationFilter) throws Exception{
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class);
         http.addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class);
         http.addFilterAt(staticAuthenticationFilter, BasicAuthenticationFilter.class);
