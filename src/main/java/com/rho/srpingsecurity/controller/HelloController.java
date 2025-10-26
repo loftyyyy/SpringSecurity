@@ -1,5 +1,6 @@
 package com.rho.srpingsecurity.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Hello, world";
+        return "Hello, " + SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
 //STOPPED At page 28

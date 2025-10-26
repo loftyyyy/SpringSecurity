@@ -1,0 +1,2 @@
+We can create multiple authentication filters, and multiple authentication providers. Make sure that each authentication filter corresponds to one authentication provider.
+For example, we can create a username-password, email-password, and OAuth google authentication provider, we must also create a authentication filter that supports it. So that it can create the proper authentication object
