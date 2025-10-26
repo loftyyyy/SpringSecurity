@@ -1,6 +1,7 @@
 package com.rho.srpingsecurity.config;
 
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -26,8 +27,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
 
         UserDetails u = userDetailsService.loadUserByUsername(username);
-
-        return null;
+        if(passwordEncoder.matches(password,u.getPassword())){
+            return new UsernamePasswordAuthenticationToken(username, password, u.getAuthorities());
+        }else{
+            throw new BadCredentialsException("Something went wrong");
+        }
     }
 
     @Override
