@@ -1,2 +1,9 @@
 We can create multiple authentication filters, and multiple authentication providers. Make sure that each authentication filter corresponds to one authentication provider.
 For example, we can create a username-password, email-password, and OAuth google authentication provider, we must also create a authentication filter that supports it. So that it can create the proper authentication object
+
+When creating a project in scratch, I would first think about the security side first. I would look at how the Authentication Logic and implement it depending on the applications' needs.
+Think about the strategy that you will use in the security context. Each strategy vary depending on your case.
+    Strategies:
+        * MODE_THREADLOCAL
+        * MODE_INHERITEDTHREADLOCAL
+        * MODE_GLOBAL.
