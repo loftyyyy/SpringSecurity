@@ -20,4 +20,3 @@ public class HelloController {
         return "Hello, " + SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
-//STOPPED At page 28
