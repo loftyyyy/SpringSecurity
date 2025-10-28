@@ -4,6 +4,8 @@ package com.rho.srpingsecurity.config;
 import com.rho.srpingsecurity.config.filter.AuthenticationLoggingFilter;
 import com.rho.srpingsecurity.config.filter.RequestValidationFilter;
 import com.rho.srpingsecurity.config.filter.StaticAuthenticationFilter;
+import com.rho.srpingsecurity.config.handler.CustomAuthenticationFailureHandler;
+import com.rho.srpingsecurity.config.handler.CustomAuthenticationSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -32,10 +34,15 @@ public class WebAuthorizationConfig {
 //            c.authenticationEntryPoint(new CustomEntryPoint());
 //        });
 
-        http.formLogin(c -> c.defaultSuccessUrl("/home", true));
+        http.formLogin(c -> {
+            c.defaultSuccessUrl("/home", true);
+            c.successHandler(new CustomAuthenticationSuccessHandler());
+            c.failureHandler(new CustomAuthenticationFailureHandler());
+        });
         http.authenticationProvider(authenticationProvider);
         http.authorizeHttpRequests(c -> c.anyRequest().authenticated());
         return http.build();
     }
+
 
 }

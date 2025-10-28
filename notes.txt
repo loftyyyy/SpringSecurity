@@ -11,3 +11,28 @@ Think about the strategy that you will use in the security context. Each strateg
     Didn't really learn or dove deep in the threads or strategies, since I figured that I won't really need to customize it. Might learn it later if needed for my project.
 
 
+10/29/2025
+
+    AuthenticationEntryPoint()
+        I was introduced to Entry Points, it’s the component that handles what happens when a user tries to access a protected resource without being authenticated.
+        We can use entry point on these two methods in the SecurityConfig() method, either on the http.httpBasic() or http.exceptionHandling().
+
+            Use entry point on http.httpBasic() when:
+                “Whenever HTTP Basic authentication is used and fails or is missing credentials, use this entry point.”
+
+            Use entry point on http.exceptionHandling() when:
+                “Whenever an unauthenticated request tries to access a protected resource — regardless of mechanism — use this entry point globally.”
+
+        The best approach is to use both if possible.
+
+
+    Authentication Handler
+
+        AuthenticationSuccessHandler()
+
+        AuthenticationFailureHandler()
+
+
+    The difference between EntryPoint and AuthenticationHandler:
+        "In Spring Security, an **AuthenticationEntryPoint** and an **AuthenticationHandler** serve different roles in the authentication flow. The **AuthenticationEntryPoint** is triggered when a user tries to access a protected resource **without being authenticated**, meaning no credentials were provided at all. It decides how the system should respond—such as returning a `401 Unauthorized` for APIs or redirecting to a login page for web apps. On the other hand, an **AuthenticationHandler** (specifically the `AuthenticationSuccessHandler` and `AuthenticationFailureHandler`) is used **after a login attempt** has been made. The success handler runs when authentication succeeds (e.g., logging in successfully), while the failure handler runs when authentication fails (e.g., wrong username or password).
+        In short, the entry point handles *unauthenticated access*, while the handlers deal with *the result of an authentication attempt*."
