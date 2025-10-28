@@ -1,4 +1,4 @@
-package com.rho.srpingsecurity.config;
+package com.rho.srpingsecurity.config.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -11,7 +11,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-@Component
+//@Component
 public class StaticAuthenticationFilter extends OncePerRequestFilter {
 
     @Value("${static.authorization.key}")

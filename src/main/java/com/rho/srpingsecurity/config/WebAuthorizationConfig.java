@@ -1,6 +1,9 @@
 package com.rho.srpingsecurity.config;
 
 
+import com.rho.srpingsecurity.config.filter.AuthenticationLoggingFilter;
+import com.rho.srpingsecurity.config.filter.RequestValidationFilter;
+import com.rho.srpingsecurity.config.filter.StaticAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -11,20 +14,25 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 @Configuration
 public class WebAuthorizationConfig {
-    private final StaticAuthenticationFilter staticAuthenticationFilter;
+//    private final StaticAuthenticationFilter staticAuthenticationFilter;
     private final AuthenticationProvider authenticationProvider;
 
-    public WebAuthorizationConfig(StaticAuthenticationFilter staticAuthenticationFilter, AuthenticationProvider authenticationProvider){
-        this.staticAuthenticationFilter = staticAuthenticationFilter;
+    public WebAuthorizationConfig( AuthenticationProvider authenticationProvider){
+//        this.staticAuthenticationFilter = staticAuthenticationFilter;
         this.authenticationProvider = authenticationProvider;
     }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class);
-        http.addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class);
-        http.addFilterAt(staticAuthenticationFilter, BasicAuthenticationFilter.class);
-        http.httpBasic(Customizer.withDefaults());
+//        http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class);
+//        http.addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class);
+//        http.addFilterAt(staticAuthenticationFilter, BasicAuthenticationFilter.class);
+//        http.httpBasic(c -> {
+//            c.realmName("OTHER");
+//            c.authenticationEntryPoint(new CustomEntryPoint());
+//        });
+
+        http.formLogin(c -> c.defaultSuccessUrl("/home", true));
         http.authenticationProvider(authenticationProvider);
         http.authorizeHttpRequests(c -> c.anyRequest().authenticated());
         return http.build();
