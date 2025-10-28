@@ -35,6 +35,7 @@ public class WebAuthorizationConfig {
 //        });
 
         http.formLogin(c -> {
+            c.loginPage("/login");
             c.defaultSuccessUrl("/home", true);
             c.successHandler(new CustomAuthenticationSuccessHandler());
             c.failureHandler(new CustomAuthenticationFailureHandler());

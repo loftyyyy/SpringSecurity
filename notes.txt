@@ -29,8 +29,10 @@ Think about the strategy that you will use in the security context. Each strateg
     Authentication Handler
 
         AuthenticationSuccessHandler()
+            is the component you implement when you want further customization whenever a successful log in
 
         AuthenticationFailureHandler()
+            is the component you implement when you want further customization whenever a failed log in occurs.
 
 
     The difference between EntryPoint and AuthenticationHandler:
