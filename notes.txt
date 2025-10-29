@@ -1,6 +1,10 @@
 We can create multiple authentication filters, and multiple authentication providers. Make sure that each authentication filter corresponds to one authentication provider.
 For example, we can create a username-password, email-password, and OAuth google authentication provider, we must also create a authentication filter that supports it. So that it can create the proper authentication object
 
+UserDetails and UserDetailService
+    UserDetails defines what a user is.
+    UserDetailsService defines how to fetch that user when needed (e.g., during authentication).
+
 When creating a project in scratch, I would first think about the security side first. I would look at how the Authentication Logic and implement it depending on the applications' needs.
 Think about the strategy that you will use in the security context. Each strategy vary depending on your case.
     Strategies:
@@ -38,3 +42,8 @@ Think about the strategy that you will use in the security context. Each strateg
     The difference between EntryPoint and AuthenticationHandler:
         "In Spring Security, an **AuthenticationEntryPoint** and an **AuthenticationHandler** serve different roles in the authentication flow. The **AuthenticationEntryPoint** is triggered when a user tries to access a protected resource **without being authenticated**, meaning no credentials were provided at all. It decides how the system should respond—such as returning a `401 Unauthorized` for APIs or redirecting to a login page for web apps. On the other hand, an **AuthenticationHandler** (specifically the `AuthenticationSuccessHandler` and `AuthenticationFailureHandler`) is used **after a login attempt** has been made. The success handler runs when authentication succeeds (e.g., logging in successfully), while the failure handler runs when authentication fails (e.g., wrong username or password).
         In short, the entry point handles *unauthenticated access*, while the handlers deal with *the result of an authentication attempt*."
+10/30/2025
+
+    Authorization
+        Authorization is the process during which the system decides if the authenticated user is authorized to access a particular resource.
+

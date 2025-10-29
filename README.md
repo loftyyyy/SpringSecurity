@@ -3,4 +3,6 @@ When setting up security in a Spring Boot project, the first step is to add the 
 ## Spring Security Authentication Logic
 ![Spring Authentication Logic](/src/main/resources/image/SpringSecurityAuthenticationLogic.png)
 
+## Spring Security Authorization Logic
+![Spring Authorization Logic](/src/main/resources/image/SpringSecurityAuthorizationLogic.png)
 
