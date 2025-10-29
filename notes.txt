@@ -54,6 +54,7 @@ Think about the strategy that you will use in the security context. Each strateg
             hasAuthority('WRITE')—Stipulates that the user needs the WRITE
             authority to call the endpoint.
 
+
             hasAnyAuthority('READ', 'WRITE')—Specifies that the user needs
             one of either the READ or WRITE authorities. With this expression, you
             can enumerate all the authorities for which you want to allow access
