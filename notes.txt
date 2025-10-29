@@ -47,3 +47,14 @@ Think about the strategy that you will use in the security context. Each strateg
     Authorization
         Authorization is the process during which the system decides if the authenticated user is authorized to access a particular resource.
 
+    hasAuthority() and hasAnyAuthority()
+        These methods are used in the security config mainly in the http.authorizeHttpRequests(c -> c.anyRequest().hasAuthority("write") or .hasAnyAuthority("write", "read")).
+        This tell spring to check the authority of a authenticated user if they have the following authority, if not the request is rejected and a 403 is returned
+
+            hasAuthority('WRITE')—Stipulates that the user needs the WRITE
+            authority to call the endpoint.
+
+            hasAnyAuthority('READ', 'WRITE')—Specifies that the user needs
+            one of either the READ or WRITE authorities. With this expression, you
+            can enumerate all the authorities for which you want to allow access
+

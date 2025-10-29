@@ -16,32 +16,32 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 @Configuration
 public class WebAuthorizationConfig {
-//    private final StaticAuthenticationFilter staticAuthenticationFilter;
+    private final StaticAuthenticationFilter staticAuthenticationFilter;
     private final AuthenticationProvider authenticationProvider;
 
-    public WebAuthorizationConfig( AuthenticationProvider authenticationProvider){
-//        this.staticAuthenticationFilter = staticAuthenticationFilter;
+    public WebAuthorizationConfig( AuthenticationProvider authenticationProvider, StaticAuthenticationFilter staticAuthenticationFilter){
+        this.staticAuthenticationFilter = staticAuthenticationFilter;
         this.authenticationProvider = authenticationProvider;
     }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-//        http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class);
-//        http.addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class);
-//        http.addFilterAt(staticAuthenticationFilter, BasicAuthenticationFilter.class);
-//        http.httpBasic(c -> {
-//            c.realmName("OTHER");
-//            c.authenticationEntryPoint(new CustomEntryPoint());
-//        });
-
-        http.formLogin(c -> {
-            c.loginPage("/login");
-            c.defaultSuccessUrl("/home", true);
-            c.successHandler(new CustomAuthenticationSuccessHandler());
-            c.failureHandler(new CustomAuthenticationFailureHandler());
+        http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class);
+        http.addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class);
+        http.addFilterAt(staticAuthenticationFilter, BasicAuthenticationFilter.class);
+        http.httpBasic(c -> {
+            c.realmName("OTHER");
+            c.authenticationEntryPoint(new CustomEntryPoint());
         });
+
+//        http.formLogin(c -> {
+//            c.loginPage("/login");
+//            c.defaultSuccessUrl("/home", true);
+//            c.successHandler(new CustomAuthenticationSuccessHandler());
+//            c.failureHandler(new CustomAuthenticationFailureHandler());
+//        });
         http.authenticationProvider(authenticationProvider);
-        http.authorizeHttpRequests(c -> c.anyRequest().authenticated());
+        http.authorizeHttpRequests(c -> c.anyRequest().hasAnyAuthority("write"));
         return http.build();
     }
 
