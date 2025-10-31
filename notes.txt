@@ -75,6 +75,8 @@ Think about the strategy that you will use in the security context. Each strateg
         Endpoints restriction
             Currently, we are implementing the authorization on any of the endpoints by using the .anyRequest() from http.authorizeHttpRequest(c -> c.anyRequest()); This means that all the authorization logic is used or applied on every endpoint
 
+        How to implement, create users with roles or authorities fields. Then implement it using a custom UserDetailsService and UserDetails. From there implement it in the security config http.authorizeHttpRequests(c -> c.anyRequest().hadRole("Admin")
+
 10/31/2025
 
     Authentication Filter and Authorization Filter
@@ -127,6 +129,16 @@ Think about the strategy that you will use in the security context. Each strateg
                         auth.requestMatchers("/admin/**").hasRole("ADMIN")
                     );
 
+
+    Authorization Summary
+
+        Authorization is the process during which the application decides if an authenticated request is permitted or not. Authorization always happens after authentication.
+
+        You configure how the application authorizes requests based on the authorities and roles of an authenticated user.
+
+        In your application, you can also specify that certain requests are possible for unauthenticated users.
+
+        You can configure your app to reject any request, using the denyAll() method, or permit any requests, using the permitAll() method
 
 
 
