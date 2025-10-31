@@ -41,7 +41,10 @@ public class WebAuthorizationConfig {
 //            c.failureHandler(new CustomAuthenticationFailureHandler());
 //        });
         http.authenticationProvider(authenticationProvider);
-        http.authorizeHttpRequests(c -> c.anyRequest().hasAnyAuthority("write"));
+//        http.authorizeHttpRequests(c -> c.anyRequest().authenticated());
+//        http.authorizeHttpRequests(c -> c.anyRequest().hasAnyAuthority("write"));
+        http.authorizeHttpRequests(c -> c.anyRequest().hasAnyRole("ADMIN", "STAFF"));
+
         return http.build();
     }
 

@@ -47,15 +47,88 @@ Think about the strategy that you will use in the security context. Each strateg
     Authorization
         Authorization is the process during which the system decides if the authenticated user is authorized to access a particular resource.
 
-    hasAuthority() and hasAnyAuthority()
-        These methods are used in the security config mainly in the http.authorizeHttpRequests(c -> c.anyRequest().hasAuthority("write") or .hasAnyAuthority("write", "read")).
-        This tell spring to check the authority of a authenticated user if they have the following authority, if not the request is rejected and a 403 is returned
+        hasAuthority() and hasAnyAuthority()
+            These methods are used in the security config mainly in the http.authorizeHttpRequests(c -> c.anyRequest().hasAuthority("write") or .hasAnyAuthority("write", "read")).
+            This tell spring to check the authority of a authenticated user if they have the following authority, if not the request is rejected and a 403 is returned
 
-            hasAuthority('WRITE')—Stipulates that the user needs the WRITE
-            authority to call the endpoint.
+                hasAuthority('WRITE')—Stipulates that the user needs the WRITE
+                authority to call the endpoint.
+
+                hasAnyAuthority('READ', 'WRITE')—Specifies that the user needs
+                one of either the READ or WRITE authorities. With this expression, you
+                can enumerate all the authorities for which you want to allow access
+
+        hasRole() and hasAnyRole()
+            Both are used the same way as the previous methods. It's used on http.authorizeHttpRequests(c -> c.anyRequest.hasRole("ADMIN")) or http.authorizeHttpRequest.hasAnyRole("ADMIN", "STAFF").
+
+            hasRole()
+                Checks whether the current authenticated user has a specific role. Spring automatically adds the prefix "ROLE_" before checking.
+
+            hasAnyRole()
+                Checks whether the current authenticated user has any one of the given role. Spring automatically adds the prefix "ROLE_" before checking.
 
 
-            hasAnyAuthority('READ', 'WRITE')—Specifies that the user needs
-            one of either the READ or WRITE authorities. With this expression, you
-            can enumerate all the authorities for which you want to allow access
+        access()
+            Is a flexible, generic method that allows you to write any Spring Security expression (not just role checks).
+            We could say that with the access() method, you can basically implement any kind of rule. The possibilities are endless. Just don’t forget that in applications, we always strive to keep syntax as simple as possible. Complicate your configurations only when you don’t have any other choice.
+
+        Endpoints restriction
+            Currently, we are implementing the authorization on any of the endpoints by using the .anyRequest() from http.authorizeHttpRequest(c -> c.anyRequest()); This means that all the authorization logic is used or applied on every endpoint
+
+10/31/2025
+
+    Authentication Filter and Authorization Filter
+
+        Authentication Filter
+
+            Purpose:
+
+                The authentication filter is responsible for verifying who the user is — in other words, checking the user’s identity.
+
+            Typical Behavior:
+
+                It intercepts incoming requests before access is granted.
+
+                Extracts credentials (like username/password, JWT token, API key, etc.).
+
+                Delegates authentication to an AuthenticationManager, which validates them (e.g., checking username and password against the database).
+
+                If valid, it stores the authentication object in the SecurityContext.
+
+                If invalid, it blocks the request and returns an authentication error (401 Unauthorized
+
+        Authorization Filter
+
+            Purpose:
+
+                The authorization filter determines what the authenticated user is allowed to do — in other words, checking their permissions or roles.
+
+            Typical Behavior:
+
+                Runs after authentication.
+
+                Reads the SecurityContext (which now contains the authenticated user).
+
+                Checks if the user has the necessary authority/role for the requested resource.
+
+                If access is allowed → proceeds.
+
+                If not → returns access denied (403 Forbidden).
+
+                Example in Spring Security:
+
+                AuthorizationFilter (introduced in newer versions of Spring Security 6).
+
+                FilterSecurityInterceptor (older mechanism, used before the new chain).
+
+                Configured via methods like:
+
+                    http.authorizeHttpRequests(auth ->
+                        auth.requestMatchers("/admin/**").hasRole("ADMIN")
+                    );
+
+
+
+
+
 
