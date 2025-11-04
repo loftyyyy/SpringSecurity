@@ -151,6 +151,25 @@ Think about the strategy that you will use in the security context. Each strateg
 
 11/4/2025
 
+    Configuring Endpoint level authorization: Applying restrictions
+
+        requestMatchers()
+
+            This method is used in the security configuration, specifically within the authorizeHttpRequests() method. Previously, we used anyRequest(), which means that any incoming request — regardless of the endpoint or HTTP method — will be subject to the same authorization rule.
+            On the other hand, requestMatchers() is used to define authorization rules for specific endpoints or URL patterns. Only the requests that match the specified patterns will trigger the corresponding authorization rule. This allows developers to apply different access controls to different endpoints.
+
+            NOTE
+
+                When you use matchers to refer to requests, the order of the rules should be from particular to general. This is why the anyRequest() method cannot be called before a more specific requestMatchers() method.
+
+
+
+
+
+
+
+
+
 
 
 
