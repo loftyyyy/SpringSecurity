@@ -141,6 +141,16 @@ Think about the strategy that you will use in the security context. Each strateg
         You can configure your app to reject any request, using the denyAll() method, or permit any requests, using the permitAll() method
 
 11/1/2025
+ - No learnings since all souls day.
+
+11/2/2025
+- No Learnings since all saints day.
+
+11/3/2025
+- No Learnings, focused on assembly that day.
+
+11/4/2025
+
 
 
 
