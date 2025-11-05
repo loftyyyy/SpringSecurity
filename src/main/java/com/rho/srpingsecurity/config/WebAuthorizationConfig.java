@@ -45,6 +45,8 @@ public class WebAuthorizationConfig {
 //        http.authorizeHttpRequests(c -> c.anyRequest().hasAnyAuthority("write"));
         http.authorizeHttpRequests(c -> c.anyRequest().hasAnyRole("ADMIN", "STAFF"));
         http.authorizeHttpRequests(c -> c.requestMatchers("/hello").hasRole("ADMIN"));
+        http.authorizeHttpRequests(c -> c.anyRequest().authenticated());
+
 
 
         return http.build();

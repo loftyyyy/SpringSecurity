@@ -163,6 +163,27 @@ Think about the strategy that you will use in the security context. Each strateg
                 When you use matchers to refer to requests, the order of the rules should be from particular to general. This is why the anyRequest() method cannot be called before a more specific requestMatchers() method.
 
 
+11/5/2025
+    -Spent time doing Numerical Analysis
+
+11/6/2025
+
+    Configuring endpoint level authorization: Applying restrictions on specific endpoints
+
+    We can use the ** operator to group endpoints having the same starting path. For example requestMatchers("/a/**").authenticated(), this means that any endpoint starting with /a will be authenticated. /a/b/c/d, /a/c/b and so on.
+
+            c -> c.requestMatchers("/api/**").authenticated()
+
+    We can also reject a request if the endpoint path variable isn't what we're accepting for example, we have an endpoint of /product/code/{codeNumber} which only accepts digits on the codeNumber, we can configure the security to accept only the request having digits. By doing:
+
+            Uses the /a/{param:regex}
+
+            c -> c.requestMatchers("/product/code/{code:^[0-9]*$").authenticated()
+                 c.anyRequest().denyAll()
+
+    TODO: Learn Regex
+
+
 
 
 
