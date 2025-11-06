@@ -183,6 +183,32 @@ Think about the strategy that you will use in the security context. Each strateg
 
     TODO: Learn Regex
 
+11/7/2025
+
+    Endpoint Level Authorization Summary:
+
+        In real-world scenarios, you often apply different authorization rules for different requests.
+
+        You specify the requests for which authorization rules are configured based on path and HTTP method. To do this, you use the requestMatchers() method.
+
+        When requirements are too complex to be solved with path expressions, you can implement them with the more powerful regexes.
+
+
+    9. Configuring CSRF (Cross Site Request Forgery) protection
+
+       CSRF attacks assume that a user is logged into a web application. They’re tricked by the attacker into opening a page that contains scripts that execute actions in the same application the user was working on. Because the user has already logged in (as we’ve assumed from the beginning), the forgery code can now impersonate the user and do actions on their behalf.
+
+       How do we protect our users from such scenarios? What CSRF protection wants to ensure is that only the frontend of web applications can perform mutating operations (by convention, HTTP methods other than GET, HEAD, TRACE, or OPTIONS). Then, a foreign page, like the one in our example, can’t act on behalf of the user.
+
+       By default, csrf is enabled. As you know by now, you are not able to call endpoints with POST directly without disabling CSRF protection.
+
+       To implement csrf, we just don't have to disable it in the security config. But we need to create a filter that retrieves the csrf token and find a way to send it to the client.
+
+       Csrf uses the CsrfTokenRepository which uses a sessionID or cookie along with the csrf token, so by default we need to specify both the sessionID and csrf token.
+
+
+
+
 
 
 
