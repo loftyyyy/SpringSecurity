@@ -206,6 +206,10 @@ Think about the strategy that you will use in the security context. Each strateg
 
        Csrf uses the CsrfTokenRepository which uses a sessionID or cookie along with the csrf token, so by default we need to specify both the sessionID and csrf token.
 
+       Do not  implement behavior that changes data and allows it to be called with an HTTP GET endpoint. Remember that calls to HTTP GET endpoints don’t require a CSRF token.
+
+       CSRF will be triggered whenever there is a GET REQUEST. It will send the csrf token in a hidden input on the request, you have to catch it and save it which you will send back later on, on your mutating requests.
+
 
 
 
