@@ -211,6 +211,13 @@ Think about the strategy that you will use in the security context. Each strateg
        CSRF will be triggered whenever there is a GET REQUEST. It will send the csrf token in a hidden input on the request, you have to catch it and save it which you will send back later on, on your mutating requests.
 
 
+11/8/2025
+    A CSRF is a type of attack where the user is tricked into accessing a page containing a forgery script. This script can impersonate a user logged into an application and execute actions on their behalf. CSRF protection is by default enabled in Spring Security.
+    The entry point of CSRF protection logic in the Spring Security architecture is an HTTP filter.
+    You can customize the capability that offers CSRF protection. Spring Security offers three simple contracts that you can implement and plug in to define custom CSRF protection capabilities:
+    CsrfToken — Describes the CSRF token itself
+    CsrfTokenRepository - Describes the object that creates, stores, and loads CSRF tokens
+    CsrfTokenRequestHandler — Describes the object that manages the way in which the generated CSRF token is set upon the HTTP request
 
 
 
