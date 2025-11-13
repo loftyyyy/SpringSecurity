@@ -219,6 +219,17 @@ Think about the strategy that you will use in the security context. Each strateg
     CsrfTokenRepository - Describes the object that creates, stores, and loads CSRF tokens
     CsrfTokenRequestHandler — Describes the object that manages the way in which the generated CSRF token is set upon the HTTP request
 
+11/9/2025
+
+11/10/2025
+
+11/11/2025
+
+11/12/2025
+
+11/13/2025
+
+11/14/2025
 
 
 
